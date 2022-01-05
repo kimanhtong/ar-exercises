@@ -10,5 +10,6 @@ puts "----------"
 @store1.save
 @store2 = Store.find_by(id:2)
 
+puts "The first 2 stores are now:"
 puts @store1.name
 puts @store2.name
