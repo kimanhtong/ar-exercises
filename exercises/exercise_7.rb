@@ -99,16 +99,15 @@ emp1 = Employee.new do |e|
   e.hourly_rate = 150.8
   e.store = Store.find(1)
 end
+if emp1.valid?
+  emp1.save
+end
 
 store1 = Store.new do |s|
   s.name = "Ottawa"
   s.annual_revenue = 1000000.5
   s.mens_apparel = true
   s.womens_apparel = false
-end
-
-if emp1.valid?
-  emp1.save
 end
 
 if store1.valid?
@@ -120,13 +119,28 @@ system "clear"
 if emp1.valid?
   puts "Employee #{emp1.first_name} #{emp1.last_name} is saved successfully!"
 else
-  puts emp1.errors.first[1]
+  puts emp1.errors.messages
 end
 
 if store1.valid?
   puts "Store #{store1.name} is saved successfully!"
 else
-  puts store1.errors.first[1]
+  puts store1.errors.messages
 end
 
+# Use user's inputs
+puts "Now, let's create a new store \n Please type in the store name:"
+sname = gets.chomp()
 
+temp_store = Store.new do |s|
+  s.name = sname
+end
+
+if !temp_store.valid?
+  puts "Cannot create the new store due to:"
+  puts "#{temp_store.errors.messages[:annual_revenue]}"
+  puts "#{temp_store.errors.messages[:mens_apparel]}"
+  puts "#{temp_store.errors.messages[:womens_apparel]}"
+else
+  puts "Created the new store successfully!"
+end
