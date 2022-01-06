@@ -5,6 +5,7 @@ require_relative './exercise_3'
 require_relative './exercise_4'
 require_relative './exercise_5'
 
+system "clear"
 puts "Exercise 6"
 puts "----------"
 
